@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>Mini Messenger v2</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- Mobile menu button -->
+  <button id="menuBtn" class="menu-btn">☰</button>
+
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar panel">
+      <!-- Profile (visible after login) -->
+      <div id="profilePane" class="profile-pane hidden">
+        <div class="prof-top">
+          <img id="profileAva" class="ava" alt="avatar" />
+          <div>
+            <div class="hello" id="helloText">👋 Привіт!</div>
+            <div class="muted" id="helloMail"></div>
+          </div>
+        </div>
+
+        <div class="upload-ava">
+          <input id="avaFile" type="file" accept="image/*" hidden />
+          <button id="avaBtn" class="btn">Завантажити аву</button>
+        </div>
+
+        <div class="side-actions">
+          <button class="btn" id="exportBtn">Експорт чату</button>
+          <button class="btn danger" id="clearLocalBtn">Очистити локальне</button>
+          <button class="btn outline" id="signOutBtn">Вийти</button>
+        </div>
+      </div>
+
+      <!-- Auth (before login) -->
+      <div id="authPane" class="auth-pane">
+        <div class="side-top">
+          <div class="logo">MM</div>
+          <div>
+            <div class="title">Mini Messenger</div>
+            <div class="chip">Firebase Auth + Firestore</div>
+          </div>
+        </div>
+
+        <div class="auth-block">
+          <div class="auth-row">
+            <input id="email" type="email" placeholder="Email" />
+            <input id="password" type="password" placeholder="Пароль" />
+          </div>
+          <div class="auth-actions">
+            <button id="emailSignup" class="btn">Реєстрація</button>
+            <button id="emailLogin" class="btn primary">Вхід</button>
+          </div>
+
+          <div class="auth-divider"><span>або</span></div>
+          <button id="googleBtn" class="btn">Увійти через Google</button>
+
+          <div class="auth-divider"><span>або</span></div>
+          <div class="auth-row">
+            <input id="phone" type="tel" placeholder="+380 99 123 45 67" />
+            <button id="sendCode" class="btn">Отримати SMS</button>
+          </div>
+          <div class="auth-row">
+            <input id="smsCode" type="text" placeholder="Код з SMS" />
+            <button id="verifyCode" class="btn primary">Підтвердити</button>
+          </div>
+
+          <div id="recaptcha-container"></div>
+          <div class="muted" id="authHint">Не авторизовано</div>
+        </div>
+      </div>
+
+      <!-- Chats list -->
+      <div class="list-box">
+        <div class="search">
+          <input id="search" placeholder="Пошук… (Ctrl+K)" />
+        </div>
+        <div id="chatList" class="chat-list">
+          <div class="chat-item active">
+            <div class="chat-ava">G</div>
+            <div>
+              <div class="chat-name">Global</div>
+              <div class="chat-last muted">Загальна кімната</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT -->
+    <main class="main panel">
+      <div class="topbar">
+        <div class="top-info">
+          <div class="chat-ava big" id="activeAva">G</div>
+          <div>
+            <div class="chat-name" id="activeName">Global</div>
+            <div class="chip" id="activeMeta">0 повідомлень • онлайн</div>
+          </div>
+        </div>
+        <div class="switcher">
+          <label class="chip"><input type="checkbox" id="themeTgl" /> Світла тема</label>
+          <button id="enableSound" class="btn">Увімкнути звук</button>
+        </div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+      <div class="hint">Enter — надіслати • Shift+Enter — новий рядок • Двічі клік по своєму повідомленню — редагувати</div>
+
+      <div class="composer">
+        <div class="tool">
+          <label class="btn" for="fileInp">📎</label>
+          <input id="fileInp" type="file" accept="image/*" />
+        </div>
+        <textarea id="text" placeholder="Напишіть повідомлення…"></textarea>
+        <button class="btn primary" id="sendBtn">Надіслати</button>
+      </div>
+    </main>
+  </div>
+
+  <audio id="notify" preload="auto"
+    src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABYAAAABAAAASAAAAGYAAABiZmZmZmZmZmZm"></audio>
+
+  <script type="module" src="./app.js"></script>
+
+</body>
+</html>
